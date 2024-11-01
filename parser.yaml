@@ -109,6 +109,22 @@ parsers: # array
          - 🇺🇸美国
          - 👨‍🎤其他
 
+      - name: 🧸 Steam
+        type: select
+        proxies:
+         - 🚀URL-TEST
+         - 🎛LOAD-BALANCE
+         - 🕹Fallback
+         - 👆SELECT
+         - DIRECT
+         - 🇭🇰香港
+         - 🐳台湾
+         - 🇯🇵日本
+         - 🇸🇬新加坡
+         - 🇰🇷韩国
+         - 🇺🇸美国
+         - 👨‍🎤其他
+
       - name: 🤖OpenAI
         type: select
         proxies:
@@ -363,6 +379,7 @@ parsers: # array
         - DOMAIN-SUFFIX,omnivore.app,🥷PROXY
         - RULE-SET,youtube,🎎YouTube
         - RULE-SET,netflix,📽Netflix
+        - RULE-SET,steam,🧸 Steam
         - RULE-SET,openai,🤖OpenAI
         - RULE-SET,claude,🦌Claude
         - RULE-SET,bing,🔍Bing
@@ -535,6 +552,13 @@ parsers: # array
           url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml"
           path: ./ruleset/bing.yaml
           interval: 86400
+
+        steam: # Steam的分流规则
+          type: http
+          behavior: classical
+          url: "https://raw.githubusercontent.com/ericz15/ios_rule_script/master/rule/Clash/Steam/Steam.yaml"
+          path: ./ruleset/steam.yaml
+          interval: 86400 
 
         openai: # OpenAI的分流规则
           type: http
