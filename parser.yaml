@@ -20,6 +20,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -36,6 +37,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - ⏳YouTube-Url-Test
          - DIRECT
          - 🇭🇰香港
@@ -53,6 +55,13 @@ parsers: # array
         lazy: true
         tolerance: 100
         
+      - name: 🚤URL-TEST-NX
+        type: url-test
+        url: http://www.google.com/generate_204
+        interval: 120
+        lazy: true
+        tolerance: 100
+
       - name: 🎛LOAD-BALANCE
         type: load-balance
         url: http://www.gstatic.com/generate_204
@@ -72,6 +81,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - ⏳YouTube-Url-Test
          - 👆SELECT
          - DIRECT
@@ -99,6 +109,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -115,6 +126,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -131,6 +143,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -147,6 +160,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -164,6 +178,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - 🇭🇰香港
          - 🐳台湾
@@ -179,6 +194,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -195,6 +211,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -211,6 +228,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -227,6 +245,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -243,6 +262,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -259,6 +279,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -275,6 +296,7 @@ parsers: # array
          - 🚀URL-TEST
          - 🎛LOAD-BALANCE
          - 🕹Fallback
+         - 🚤URL-TEST-NX
          - 👆SELECT
          - DIRECT
          - 🇭🇰香港
@@ -340,7 +362,8 @@ parsers: # array
           # - 节点名称或其他分组套娃
           
       commands:
-        - proxy-groups.(🚀URL-TEST).proxies=[]proxyNames
+        - proxy-groups.(🚀URL-TEST).proxies=[]proxyNames|^(1[xX]|[^Xx]*)$
+        - proxy-groups.(🚤URL-TEST-NX).proxies=[]proxyNames|^(?!.*1[xX]).*$
         - proxy-groups.(🎛LOAD-BALANCE).proxies=[]proxyNames
         - proxy-groups.(🕹Fallback).proxies=[]proxyNames
         - proxy-groups.(⏳YouTube-Url-Test).proxies=[]proxyNames
@@ -374,7 +397,8 @@ parsers: # array
   # 添加规则
       prepend-rules: # 规则由上往下遍历，如上面规则已经命中，则不再往下处理
         - IP-CIDR,172.16.0.0/16,DIRECT
-        - DOMAIN-SUFFIX,naton.cn,DIRECT
+        - IP-CIDR,172.30.0.0/16,DIRECT
+        - DOMAIN-KEYWORD,naton,DIRECT
         - DOMAIN-SUFFIX,jdev.tw,🥷PROXY
         - DOMAIN-SUFFIX,omnivore.app,🥷PROXY
         - RULE-SET,youtube,🎎YouTube
