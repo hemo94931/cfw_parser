@@ -145,7 +145,13 @@ const domesticNameservers = [
       ...ruleProviderCommon,
       "behavior": "classical",
       "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml",
-      "path": "./ruleset/blackmatrix7/claude.yaml"
+      "path": "./ruleset/blackmatrix7/github.yaml"
+    },
+    "github": {
+      ...ruleProviderCommon,
+      "behavior": "classical",
+      "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/bing.yaml",
+      "path": "./ruleset/blackmatrix7/bing.yaml"
     }
   
   };
@@ -247,6 +253,13 @@ const domesticNameservers = [
       "type": "select",
       "proxies": ["Select", "Url-test", "Fallback", "Load-balance(Hash)", "Load-balance(RR)", "Direct", "HK香港", "TW台湾", "JP日本", "SG新加坡", "KR韩国", "US美国", "其他"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/github.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "Bing",
+      "type": "select",
+      "proxies": ["Direct", "Select", "Url-test", "Fallback", "Load-balance(Hash)", "Load-balance(RR)",  "HK香港", "TW台湾", "JP日本", "SG新加坡", "KR韩国", "US美国", "其他"],
+      "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/youtube.svg"
     },
     {
       ...groupBaseOption,
