@@ -150,7 +150,7 @@ const domesticNameservers = [
     "bing": {
       ...ruleProviderCommon,
       "behavior": "classical",
-      "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/bing.yaml",
+      "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml",
       "path": "./ruleset/blackmatrix7/bing.yaml"
     }
   
