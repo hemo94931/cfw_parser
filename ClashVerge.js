@@ -147,7 +147,7 @@ const domesticNameservers = [
       "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml",
       "path": "./ruleset/blackmatrix7/github.yaml"
     },
-    "github": {
+    "bing": {
       ...ruleProviderCommon,
       "behavior": "classical",
       "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/bing.yaml",
@@ -167,6 +167,7 @@ const domesticNameservers = [
     "RULE-SET,openai,ChatGPT",
     "RULE-SET,claude,Claude",
     "RULE-SET,github,Github",
+    "RULE-SET,bing,Bing",
     // Loyalsoldier 规则集
     "RULE-SET,applications,Direct",
     "RULE-SET,private,Direct",
@@ -259,7 +260,7 @@ const domesticNameservers = [
       "name": "Bing",
       "type": "select",
       "proxies": ["Direct", "Select", "Url-test", "Fallback", "Load-balance(Hash)", "Load-balance(RR)",  "HK香港", "TW台湾", "JP日本", "SG新加坡", "KR韩国", "US美国", "其他"],
-      "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/youtube.svg"
+      "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/bing.svg"
     },
     {
       ...groupBaseOption,
