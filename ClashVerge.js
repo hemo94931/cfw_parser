@@ -152,6 +152,12 @@ const domesticNameservers = [
       "behavior": "classical",
       "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bing/Bing.yaml",
       "path": "./ruleset/blackmatrix7/bing.yaml"
+    },
+    "bilibili": {
+      ...ruleProviderCommon,
+      "behavior": "classical",
+      "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml",
+      "path": "./ruleset/blackmatrix7/bilibili.yaml"
     }
   
   };
@@ -168,6 +174,7 @@ const domesticNameservers = [
     "RULE-SET,claude,Claude",
     "RULE-SET,github,Github",
     "RULE-SET,bing,Bing",
+    "RULE-SET,bilibili,BiliBili",
     // Loyalsoldier 规则集
     "RULE-SET,applications,Direct",
     "RULE-SET,private,Direct",
@@ -261,6 +268,12 @@ const domesticNameservers = [
       "type": "select",
       "proxies": ["Direct", "Select", "Url-test", "Fallback", "Load-balance(Hash)", "Load-balance(RR)",  "HK香港", "TW台湾", "JP日本", "SG新加坡", "KR韩国", "US美国", "其他"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/bing.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "BiliBili",
+      "type": "select",
+      "proxies": ["Direct", "Select", "Url-test", "Fallback", "Load-balance(Hash)", "Load-balance(RR)",  "HK香港", "TW台湾", "JP日本", "SG新加坡", "KR韩国", "US美国", "其他"]
     },
     {
       ...groupBaseOption,
