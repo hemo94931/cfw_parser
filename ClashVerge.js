@@ -17,8 +17,9 @@ const domesticNameservers = [
   const dnsConfig = {
     "enable": true,
     "listen": "0.0.0.0:1053",
-    "ipv6": true,
-    "use-system-hosts": false,
+    "prefer-h3": true, // 如果DNS服务器支持DoH3会优先使用h3
+    "ipv6": false,
+    // "use-system-hosts": false,
     "cache-algorithm": "arc",
     "enhanced-mode": "fake-ip",
     "fake-ip-range": "198.18.0.1/16",
