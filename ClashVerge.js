@@ -401,24 +401,123 @@ const domesticNameservers = [
   ];
   
   // 程序入口
+  // function main(config) {
+    // const proxyCount = config?.proxies?.length ?? 0;
+    // const proxyProviderCount =
+    //   typeof config?.["proxy-providers"] === "object" ? Object.keys(config["proxy-providers"]).length : 0;
+    // if (proxyCount === 0 && proxyProviderCount === 0) {
+    //   throw new Error("配置文件中未找到任何代理");
+    // }
+  
+    // // 覆盖原配置中DNS配置
+    // config["dns"] = dnsConfig;
+  
+    // // 覆盖原配置中的代理组
+    // config["proxy-groups"] = proxyGroups;
+  
+    // // 覆盖原配置中的规则
+    // config["rule-providers"] = ruleProviders;
+    // config["rules"] = rules;
+  
+    // // 返回修改后的配置
+    // return config;
+    
+  // }
+
   function main(config) {
-    const proxyCount = config?.proxies?.length ?? 0;
-    const proxyProviderCount =
-      typeof config?.["proxy-providers"] === "object" ? Object.keys(config["proxy-providers"]).length : 0;
-    if (proxyCount === 0 && proxyProviderCount === 0) {
-      throw new Error("配置文件中未找到任何代理");
+    const isObject = (value) => {
+      return value !== null && typeof value === 'object'
     }
   
-    // 覆盖原配置中DNS配置
-    config["dns"] = dnsConfig;
+    const mergeConfig = (existingConfig, newConfig) => {
+      if (!isObject(existingConfig)) {
+        existingConfig = {}
+      }
+      if (!isObject(newConfig)) {
+        return existingConfig
+      }
+      return { ...existingConfig, ...newConfig }
+    }
   
-    // 覆盖原配置中的代理组
+    // 删除原来的配置文件中 dns的 fallback 和 fallback-filter 项（已过时）
+    delete config.dns.fallback
+    delete config.dns['fallback-filter']
+  
+    const cnDnsList = [
+      'system',
+      '114.114.114.114', 
+      '223.5.5.5', // 阿里
+      '119.29.29.29', // 腾讯
+      '180.184.1.1', // 字节
+      '180.76.76.76' // 百度
+    ]
+  
+    const foreignDnsList = [
+      'tls://8.8.4.4',
+      'tls://1.1.1.1',
+    ]
+  
+    const dnsOptions = {
+      'enable': true,
+      'nameserver': foreignDnsList, // 默认的域名解析服务器
+      'nameserver-policy': {
+        'geosite:cn': cnDnsList
+      },
+      'proxy-server-nameserver': [
+        'tls://8.8.4.4',
+      ],
+    }
+  
+    // 用更精简的GEO数据库代替原版的GEO数据库，下面的操作是更换GEO数据库的下载地址
+    // 原因详见这篇博客（https://lainbo.dev/clash-config）的“解决 GEOIP, CN 问题”这一小节
+  
+    // GitHub加速前缀
+    const githubPrefix = 'https://fastgh.lainbo.com/'
+  
+    // GEO数据GitHub资源原始下载地址
+    const rawGeoxURLs = {
+      geoip: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat',
+      geosite: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat',
+      mmdb: 'https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb',
+    }
+  
+    // 生成带有加速前缀的GEO数据资源对象
+    const accelURLs = Object.fromEntries(
+      Object.entries(rawGeoxURLs).map(([key, githubUrl]) => [key, `${githubPrefix}${githubUrl}`]),
+    )
+  
+    const otherOptions = {
+      'unified-delay': true,
+      'tcp-concurrent': true,
+      'profile': {
+        'store-selected': true,
+        'store-fake-ip': true,
+      },
+      'sniffer': {
+        enable: true,
+        sniff: {
+          TLS: {
+            ports: [443, 8443],
+          },
+          HTTP: {
+            'ports': [80, '8080-8880'],
+            'override-destination': true,
+          },
+        },
+      },
+      'geodata-mode': true,
+      'geo-auto-update': true,
+      'geo-update-interval': 24,
+      'geodata-loader': 'standard',
+      'geox-url': accelURLs,
+      'find-process-mode': 'strict',
+    }
+    config.dns = mergeConfig(config.dns, dnsOptions)
+  
     config["proxy-groups"] = proxyGroups;
-  
-    // 覆盖原配置中的规则
+
     config["rule-providers"] = ruleProviders;
     config["rules"] = rules;
-  
-    // 返回修改后的配置
-    return config;
+
+    return { ...config, ...otherOptions }
   }
