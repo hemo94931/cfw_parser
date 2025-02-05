@@ -170,6 +170,7 @@ const domesticNameservers = [
     "DOMAIN-SUFFIX,xn--ngstr-lra8j.com,Select", // Google Play下载服务
     "DOMAIN-SUFFIX,github.io,Select", // Github Pages
     "DOMAIN,v2rayse.com,Select", // V2rayse节点工具
+    "DOMAIN-SUFFIX,linux.do,Direct", // linux do社区
     // blackmatrix7 规则集
     "RULE-SET,openai,ChatGPT",
     "RULE-SET,claude,Claude",
